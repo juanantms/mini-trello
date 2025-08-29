@@ -60,7 +60,11 @@ Este proyecto está configurado para funcionar con **Laravel Sail**, el entorno 
 1.  **Clona el repositorio y navega al directorio.**
 
 2.  **Prepara el entorno:**
-    Copia el archivo de entorno de ejemplo. Sail lo leerá para la configuración inicial.
+    Ejecuta el script de configuración para SQLite (o copia el archivo de entorno manualmente):
+    ```bash
+    ./setup-sqlite.sh
+    ```
+    O alternativamente:
     ```bash
     cp .env.example .env
     ```
