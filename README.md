@@ -33,7 +33,7 @@ El reto consiste en desarrollar un pequeño gestor de tareas al estilo "Kanban B
 ### Requisitos Técnicos
 
 *   **Backend:** Laravel 9.
-*   **Frontend:** Toda la lógica interactiva debe ser implementada con Livewire 2.
+*   **Frontend:** Toda la lógica interactiva debe ser implementada con Livewire 2 (tienes que instalar la dependencia de Livewire en el proyecto).
 *   **Base de Datos:** Utilizar **SQLite**. Esto simplifica la configuración para que puedas enfocarte en el código. El archivo de la base de datos debe estar incluido en el directorio `database/`.
 *   **Estilos:** Eres libre de usar el framework CSS que prefieras (TailwindCSS es recomendado por su buena integración con Livewire), o incluso CSS puro. Lo importante es que la interfaz sea limpia, usable y estéticamente agradable.
 
