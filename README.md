@@ -31,7 +31,13 @@ cp .env.example .env
 nano .env  # Edita APP_KEY y otros valores si es necesario
 ```
 
-### 3. Genera la clave de la aplicación
+### 3. Instala dependencias y levanta el entorno
+```bash
+composer install
+./vendor/bin/sail up -d
+```
+
+### 4. Genera la clave de la aplicación
 ```bash
 ./vendor/bin/sail artisan key:generate
 ```
@@ -45,19 +51,30 @@ nano .env  # Edita APP_KEY y otros valores si es necesario
 ./vendor/bin/sail up -d
 ```
 
-### 2. Ejecuta migraciones y seeders
+### 2. Entra al contenedor
 ```bash
-./vendor/bin/sail artisan migrate
-./vendor/bin/sail artisan db:seed
+./vendor/bin/sail shell
 ```
 
-### 3. Instala dependencias de frontend y compila assets
+### 3. Instala dependencias de frontend
 ```bash
-./vendor/bin/sail npm install
-./vendor/bin/sail npm run dev
+npm install
 ```
 
-### 4. Accede a la aplicación
+### 4. Ejecuta migraciones y seeders dentro del contenedor
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+### 5. Optimiza y compila assets fuera del contenedor
+```bash
+php artisan optimize:clear
+exit
+npm run dev
+```
+
+### 6. Accede a la aplicación
 - URL: [http://localhost](http://localhost)
 - Usuario admin: `admin@minitrello.com`
 - Contraseña: `test`
@@ -79,6 +96,11 @@ nano .env  # Edita APP_KEY y otros valores si es necesario
 ### Ejecutar tests
 ```bash
 ./vendor/bin/sail test
+```
+
+> Antes de ejecutar los tests, asegúrate de crear el archivo `database/testing.sqlite`:
+```bash
+touch database/testing.sqlite
 ```
 
 **¡Listo para trabajar y desplegar en minutos!** 🚀
