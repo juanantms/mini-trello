@@ -12,9 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('kanban')" :active="request()->routeIs('kanban')">
+                        {{ __('Mis Tareas') }}
                     </x-nav-link>
+                    @if(Auth::user() && Auth::user()->can('view-logs'))
+                        <x-nav-link :href="route('logs')" :active="request()->routeIs('logs')">
+                            {{ __('Logs del Sistema') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -67,8 +72,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('kanban')" :active="request()->routeIs('kanban')">
+                {{ __('Mis Tareas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('logs')" :active="request()->routeIs('logs')">
+                {{ __('Logs del Sistema') }}
             </x-responsive-nav-link>
         </div>
 

@@ -3,26 +3,27 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('kanban');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Kanban Board - Vista principal
+    Route::get('/kanban', function () {
+        return view('kanban');
+    })->name('kanban');
+    
+    // System Logs - Auditoría del sistema
+    Route::get('/logs', function () {
+        return view('logs');
+    })->middleware('can:view-logs')->name('logs');
+    
+    // Dashboard redirige al kanban
+    Route::get('/dashboard', function () {
+        return redirect()->route('kanban');
+    })->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+    // Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
